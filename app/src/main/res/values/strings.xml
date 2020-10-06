@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">RunningMan</string>
+    <!--    API_KEY-->
+    <string name="google_map_api_key">AIzaSyANXceLUUsuOzs5ogEUCvQoFjJ9q5Iif28</string>
+    <!--    LOGIN AND SIGN UP-->
+    <string name="prompt_email">Email Address</string>
+    <string name="password">Password</string>
+    <string name="sign_in">Sign In</string>
+    <string name="register">Register</string>
+    <string name="email_registration">Email Registration</string>
+    <string name="confirm_password">Confirm Password</string>
+    <!--    Running Page-->
+    <string name="start_run">Start</string>
+    <string name="stop_run">Stop</string>
+    <string name="title_activity_fullscreen">FullscreenActivity</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+</resources>
