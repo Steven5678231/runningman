@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
     <Button
@@ -19,11 +20,12 @@
         />
 
     <Button
-        android:id="@+id/go_extend"
+        android:id="@+id/go_walk_page"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Unknown"
+        android:text="Walking"
         />
+
 
 
 </LinearLayout>

@@ -75,7 +75,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                             //Initial and store User information
 
                             String uid = mAuth.getCurrentUser().getUid();
-                            User user = new User(mEmail.getText().toString(), uid, "hello", "world");
+                            User user = new User(mEmail.getText().toString(), uid, "", "",0);
                             usersDb.child(uid).setValue(user);
                             redirectLoginScreen();
 

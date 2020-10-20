@@ -15,4 +15,12 @@
     <string name="title_activity_fullscreen">FullscreenActivity</string>
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
+    <!--    Dynamic stinrg-->
+    <string name="earn_coin_string">0 coin !</string>
+
+    <string name="text">Home</string>
+    <string name="text2">Likes</string>
+    <string name="text3">Bookmarks</string>
+    <string name="text4">Settings</string>
+    <string name="action_clear">Clear</string>
 </resources>

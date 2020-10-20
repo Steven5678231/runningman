@@ -28,7 +28,8 @@ public class UserPage extends AppCompatActivity {
 
     User user;
 
-    @Override
+    private int record_count;
+  @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.main_menu, menu);
@@ -80,15 +81,18 @@ public class UserPage extends AppCompatActivity {
                     Log.d(TAG, "onDataChange: "+user.getUser_id());
                     Log.d(TAG, "onDataChange: "+user.getUsername());
                     Log.d(TAG, "onDataChange: "+user.getClass());
+
+                    Log.d(TAG, "onDataChange: "+record_count);
                 }
 
 
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
             }
         });
+
+
     }
 }

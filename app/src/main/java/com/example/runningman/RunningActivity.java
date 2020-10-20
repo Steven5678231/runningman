@@ -20,11 +20,16 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -44,9 +49,15 @@ import com.google.android.gms.maps.model.PolylineOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
+import org.w3c.dom.Text;
+
+import java.io.StringBufferInputStream;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -63,20 +74,25 @@ public class RunningActivity extends FragmentActivity implements View.OnClickLis
     private LatLng startlatLng, startPoint;
     private boolean startCount;
     private float distance;
+    private float mean_speed;
+    private float max_speed;
     private int seconds_spent;
+    private int record_count;
+    private float earned_coin_value;
 
     private TextView distance_textView;
     private TextView speed_textView;
     private TextView duration_textView;
     private TextView cal_textView;
     private TextView big_duration_textView;
+    private TextView earned_coin_textView;
 
     GoogleMap map;
     SupportMapFragment mapFragment;
     FusedLocationProviderClient client;
 
     FirebaseDatabase mDatabase;
-    DatabaseReference locationDb,runRecordDb;
+    DatabaseReference userDb, locationDb, runRecordDb;
 
     Runnable runnable;
 
@@ -125,6 +141,7 @@ public class RunningActivity extends FragmentActivity implements View.OnClickLis
         cal_textView = (TextView) findViewById(R.id.calTextView);
         big_duration_textView = (TextView)findViewById(R.id.bigDuration);
 
+
         mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         //init
@@ -133,8 +150,11 @@ public class RunningActivity extends FragmentActivity implements View.OnClickLis
         mDatabase = FirebaseDatabase.getInstance();
         locationDb = mDatabase.getReference("locations");
         runRecordDb = mDatabase.getReference("run_records");
+        userDb = mDatabase.getReference("users");
         //Initial user information
         mAuth = FirebaseAuth.getInstance();
+
+        max_speed = 0;
 
         client = LocationServices.getFusedLocationProviderClient(this);
 
@@ -157,12 +177,28 @@ public class RunningActivity extends FragmentActivity implements View.OnClickLis
         handler.postDelayed(runnable = new Runnable() {
             @Override
             public void run() {
-                Log.d(TAG, "run: running");
+
                 handler.postDelayed(runnable, delay);
-                updateLocation();
-                updateTime();
-                updateCal();
-                updateSpeed();
+                if (startCount){
+                    Log.d(TAG, "run: running");
+                    updateLocation();
+                    updateTime();
+                    updateCal();
+                    updateSpeed();
+                }
+                else{
+
+                    //Reset all data
+
+                    distance_textView.setText("0 km");
+                    distance = 0;
+                    duration_textView.setText("00 : 00");
+
+                    speed_textView.setText("0 m/s");
+                    cal_textView.setText("0 Kj");
+                    big_duration_textView.setText("00:00:00");
+                }
+
             }
         },delay);
 
@@ -173,12 +209,44 @@ public class RunningActivity extends FragmentActivity implements View.OnClickLis
 
     }
 
+    public void onButtonShowPopupWindowClick(View view, String earned_string) {
+        // Pop up window
+        LayoutInflater inflater = (LayoutInflater)
+                getSystemService(LAYOUT_INFLATER_SERVICE);
+        View popupView = inflater.inflate(R.layout.popup_window, null);
+
+
+        int width = LinearLayout.LayoutParams.WRAP_CONTENT;
+        int height = LinearLayout.LayoutParams.WRAP_CONTENT;
+        boolean focusable = true; //let taps outside the popup also dismiss it
+        final PopupWindow popupWindow = new PopupWindow(popupView, width, height, true);
+
+        earned_coin_textView = (TextView) popupWindow.getContentView().findViewById(R.id.earned_coin);
+        earned_coin_textView.setText(earned_string);
+
+        Toast.makeText(this, earned_string, Toast.LENGTH_SHORT).show();
+        popupWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
+
+        // dismiss the popup window when touched
+        popupView.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                popupWindow.dismiss();
+                return true;
+            }
+
+        });
+    }
+
     private void updateSpeed(){
         if (startCount){
-            float mean_speed = distance / seconds_spent;
+            mean_speed = distance * 1000 / seconds_spent;
             DecimalFormat decimalFormat = new DecimalFormat("0.00");
             String speedString = decimalFormat.format(mean_speed);
             speed_textView.setText(speedString + "m/s");
+            if (mean_speed>max_speed){
+                max_speed = mean_speed;
+            }
         }
     }
 
@@ -241,14 +309,14 @@ public class RunningActivity extends FragmentActivity implements View.OnClickLis
                         @Override
                         public void onMapReady(GoogleMap googleMap) {
                             // current location
-//                            LatLng currentlatLng = new LatLng(location.getLatitude(),
-//                                    location.getLongitude());
-                            LatLng currentlatLng = new LatLng(startlatLng.latitude+0.01,
-                                    startlatLng.longitude+0.01);
+                            LatLng currentlatLng = new LatLng(location.getLatitude(),
+                                    location.getLongitude());
+//                            LatLng currentlatLng = new LatLng(startlatLng.latitude+0.01,
+//                                    startlatLng.longitude+0.01);
 
                             //distance calculation
-                            float curr_distance = getDistance(startlatLng.latitude,startlatLng.longitude,currentlatLng.latitude,currentlatLng.longitude);
-                            distance += curr_distance;
+                            float curr_distance = getDistance(startlatLng.latitude, startlatLng.longitude, currentlatLng.latitude, currentlatLng.longitude);
+                            distance += curr_distance/1000;
                             DecimalFormat decimalFormat = new DecimalFormat("0.00");
                             String distanceString = decimalFormat.format(distance);
                             distance_textView.setText(distanceString+" km");
@@ -315,6 +383,26 @@ public class RunningActivity extends FragmentActivity implements View.OnClickLis
             }
         }
     }
+    private float calculate(float distance, long diffTime){
+
+        float result = (float) (distance * 0.5 + diffTime * 0.5);
+        return result;
+    }
+
+    private void storeRecords(int count, long diffHours){
+        //Store data in runRecordDb
+        String uid = mAuth.getCurrentUser().getUid();
+        if (count>=0){
+            count++;
+            Log.d(TAG, "storeRecords: "+count);
+            String record_count_String = Integer.toString(count);
+            RunInfo runInfo1 = new RunInfo(diffHours, distance, mean_speed, max_speed, earned_coin_value, startDate);
+            runRecordDb.child(uid).child(record_count_String).setValue(runInfo1);
+            runRecordDb.child(uid).child(startDate).child(record_count_String).setValue(runInfo1);
+            userDb.child(uid).child("records_count").child(startDate).setValue(count);
+        }
+    }
+
 
     @Override
     public void onClick(View view) {
@@ -324,13 +412,35 @@ public class RunningActivity extends FragmentActivity implements View.OnClickLis
                         (Button)findViewById(R.id.startRun);
 
                 Calendar calendar = Calendar.getInstance();
-                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("EEE, dd-MMM-yyyy hh:mm:ss a");
+                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
                 startDate = simpleDateFormat.format(calendar.getTime());
                 startTime = calendar.getTime();
                 startCount = true;
+                max_speed = 0;
+
                 Log.d(TAG, "onClick: "+startDate);
                 Log.d(TAG, "onClick2: "+startTime);
 
+                userDb.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        String uid = mAuth.getCurrentUser().getUid();
+                        long record = 0;
+                        try{
+                            record = snapshot.child(uid).child("records_count").child(startDate).getValue(Long.class);
+                        }catch (Exception e){
+
+                        }
+                        record_count = (int) record;
+
+                        Log.d(TAG, "onDataChange: "+record_count);
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
                 break;
             }
             case R.id.stopRun:{
@@ -344,16 +454,32 @@ public class RunningActivity extends FragmentActivity implements View.OnClickLis
 
                     long diffSeconds = diff / 1000;
                     long diffMinutes = diff / (60*1000);
-                    long diffHours = diff / (60*60*1000);
+                    final long diffHours = diff / (60*60*1000);
 
                     if (mAuth.getCurrentUser()==null){
                         Toast.makeText(RunningActivity.this,"Please login first!", Toast.LENGTH_SHORT).show();
                         return;
                     }
+
+                    //calculate earned coins
+                    earned_coin_value = calculate(this.distance, diffHours);
+                    Log.d(TAG, "onClick: "+earned_coin_value);
+                    DecimalFormat decimalFormat = new DecimalFormat("0.00");
+                    String earned_coin_string = decimalFormat.format(earned_coin_value);
+
+                    //popup
+//                    onButtonShowPopupWindowClick(view, earned_coin_string);
+
                     //Store info in database
-                    RunInfo runInfo = new RunInfo(diff,0,0,startDate);
-                    String uid = mAuth.getCurrentUser().getUid();
-                    runRecordDb.child(uid).setValue(runInfo);
+                    //Obtain current number of running records;
+
+
+                    storeRecords(record_count, diffHours);
+
+                    Intent intent = new Intent(RunningActivity.this, RunningFinished.class);
+                    startActivity(intent);
+                    break;
+
                 }else{
                     Toast.makeText(RunningActivity.this,"Please start first", Toast.LENGTH_SHORT).show();
                 }

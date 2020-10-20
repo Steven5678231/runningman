@@ -3,7 +3,9 @@ package com.example.runningman;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -11,8 +13,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
+
 public class PlayGround extends AppCompatActivity implements View.OnClickListener{
 
+    private Context context;
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -54,6 +58,7 @@ public class PlayGround extends AppCompatActivity implements View.OnClickListene
 
         findViewById(R.id.go_city_page).setOnClickListener(this);
         findViewById(R.id.go_run_page).setOnClickListener(this);
+        findViewById(R.id.go_walk_page).setOnClickListener(this);
 
 
     }
@@ -68,6 +73,11 @@ public class PlayGround extends AppCompatActivity implements View.OnClickListene
             }
             case R.id.go_run_page:{
                 Intent intent = new Intent(PlayGround.this, RunningActivity.class);
+                startActivity(intent);
+                break;
+            }
+            case R.id.go_walk_page:{
+                Intent intent = new Intent(PlayGround.this, StepCounterActivity.class);
                 startActivity(intent);
                 break;
             }

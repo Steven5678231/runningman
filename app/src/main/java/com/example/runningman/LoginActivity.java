@@ -74,8 +74,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private void signIn(){
         if(!isEmpty(mEmail.getText().toString()) && !isEmpty(mPassword.getText().toString())){
             Log.d(TAG, "signIn: attempting to authenticate");
+
+            //step1:
             mDatabase = FirebaseDatabase.getInstance();
             usersDb = mDatabase.getReference("users");
+
+
 
             mAuth.signInWithEmailAndPassword(mEmail.getText().toString(),
                     mPassword.getText().toString())
@@ -84,10 +88,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()){
                                 Log.d(TAG, "onComplete: SignIn success");
+
                                 usersDb.addValueEventListener(new ValueEventListener() {
                                     @Override
                                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                                         String uid = (String) mAuth.getCurrentUser().getUid();
+                                        String email = (String) snapshot.child(uid).child("email").getValue();
+
                                         String uid2 = (String) snapshot.child(uid).child("user_id").getValue();
                                         String name = (String) snapshot.child(uid).child("username").getValue();
                                         String extraInfo = (String) snapshot.child(uid).child("extraInfo").getValue();
