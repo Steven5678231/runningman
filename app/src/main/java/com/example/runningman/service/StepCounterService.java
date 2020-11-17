@@ -9,6 +9,7 @@ import android.hardware.SensorManager;
 import android.os.IBinder;
 import android.widget.Toast;
 
+
 import androidx.annotation.Nullable;
 
 public class StepCounterService extends Service implements SensorEventListener {
@@ -29,7 +30,7 @@ public class StepCounterService extends Service implements SensorEventListener {
     @Override
     public void onCreate() {
         super.onCreate();
-        Toast.makeText(this, "service done", Toast.LENGTH_SHORT).show();
+//        Toast.makeText(this, "service done", Toast.LENGTH_SHORT).show();
         stepCount = 0;
         MagnitudePrevious = 0;
         sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
@@ -65,7 +66,7 @@ public class StepCounterService extends Service implements SensorEventListener {
 
             if (MagnitudeDelta > 3) {
                 stepCount++;
-                intent.putExtra("steps", stepCount);
+                intent.putExtra("steps", stepCount/3);
             }
             sendBroadcast(intent);
         }

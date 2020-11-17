@@ -1,25 +1,30 @@
 package com.example.runningman.models;
 
-import java.util.Date;
 
 public class RunInfo {
     private long timelast;
     private float distance;
     private float mean_speed;
     private float max_speed;
-    private float earned_coin_value;
+    private int earned_coin_value;
     private String date;
+    private String step;
 
-    public RunInfo(long timelast, float distance, float mean_speed, float max_speed, float earned_coin_value, String date) {
+    public RunInfo(){
+
+    }
+    public RunInfo(long timelast, float distance, float mean_speed, float max_speed,
+                   int earned_coin_value, String date, String step) {
         this.timelast = timelast;
         this.distance = distance;
         this.mean_speed = mean_speed;
         this.max_speed = max_speed;
         this.earned_coin_value = earned_coin_value;
         this.date = date;
+        this.step = step;
     }
 
-    public float getTimelast() {
+    public long getTimelast() {
         return timelast;
     }
 
@@ -35,8 +40,12 @@ public class RunInfo {
         return max_speed;
     }
 
-    public float getEarned_coin_value(){
+    public int getEarned_coin_value(){
         return earned_coin_value;
+    }
+
+    public String getStep(){
+        return step;
     }
 
     public String getDate() {

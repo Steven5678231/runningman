@@ -45,7 +45,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
                 android:text="@string/sign_in"
-                android:textStyle="bold"
+                android:textColor="#FFFFFF"
                 android:background="@drawable/theme_button"/>
 
             <RelativeLayout
@@ -55,14 +55,14 @@
 
 
                 <Button android:id="@+id/link_register"
+                    style="?android:textAppearanceSmall"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
                     android:text="@string/register"
-                    android:gravity="center"
                     android:textSize="16sp"
-                    android:textColor="@color/linkBlue"
-                    android:layout_centerHorizontal="true"/>
+                    android:textColor="#FFFFFF"
+                    android:background="@drawable/theme_button" />
 
 
             </RelativeLayout>

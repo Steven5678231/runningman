@@ -69,6 +69,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/input_confirm_password"
                     android:layout_marginTop="35dp"
+                    android:textColor="#FFFFFF"
                     android:background="@drawable/theme_button"
                     android:text="@string/register" />
 
@@ -79,6 +80,7 @@
                     android:layout_below="@+id/btn_register"
                     android:layout_marginTop="25dp"
                     android:background="@drawable/theme_button"
+                    android:textColor="#FFFFFF"
                     android:text="@string/sign_in" />
 
             </RelativeLayout>

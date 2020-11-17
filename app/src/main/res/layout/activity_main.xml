@@ -1,37 +1,95 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 
+<androidx.drawerlayout.widget.DrawerLayout
+
+    android:id="@+id/dl_layout"
+    android:background="#EEEEEE"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    >
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
 
-    <Button
-        android:id="@+id/go_user_page"
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="User Page"
-        />
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
+        <include layout="@layout/layout_titlebar"/>
 
-    <Button
-        android:id="@+id/go_playground"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Playground"
-        />
+        <TextView
 
-    <Button
-        android:id="@+id/extendTwo"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Pets"
-        />
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/UserInfoShow"
-        />
+            android:id="@+id/welcome"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:gravity="center"
+            android:text="Keep Running! Keep Growing!"
+            android:textColor="#000000"
+            android:textSize="25sp" />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="509dp"
+            android:layout_marginTop="32dp"
+            android:layout_weight="1"
+            android:src="@mipmap/logo2" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_weight="2"
+            android:padding="16dp"
+            android:gravity="center"
+            android:layout_marginBottom="16dp"
+            android:weightSum="5">
+
+            <TextView
+
+                android:id="@+id/tv_already_login"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+
+                android:gravity="center"
+                android:text="Welcome to the world!"
+                android:textColor="#000000"
+                android:visibility="invisible"
+                android:textSize="30sp" />
+
+            <com.manojbhadane.QButton
+                android:id="@+id/mainRegister"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Creat Account"
+                android:layout_weight="1"
+                android:textColor="@android:color/white"
+                app:qb_backgroundColor="@color/red1"
+                app:qb_radius="20"
+
+                app:qb_strokeWidth="5"/>
+
+            <com.manojbhadane.QButton
+                android:layout_weight="1"
+                android:id="@+id/mainSignin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Sign In"
+                android:textColor="@android:color/white"
+                app:qb_backgroundColor="@null"
+                app:qb_radius="20"
+                app:qb_strokeWidth="5"/>
+        </LinearLayout>
 
 
-</LinearLayout>
+
+    </LinearLayout>
+
+
+
+    <include layout="@layout/nag_linearlayout"/>
+
+</androidx.drawerlayout.widget.DrawerLayout>

@@ -1,17 +1,16 @@
 package com.example.runningman;
 
-import androidx.annotation.LongDef;
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.runningman.models.User;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -24,8 +23,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
-import static com.example.runningman.CheckUtils.isEmpty;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -72,7 +69,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
     private void signIn(){
-        if(!isEmpty(mEmail.getText().toString()) && !isEmpty(mPassword.getText().toString())){
+        if(!(mEmail.getText().toString().isEmpty()) && !(mPassword.getText().toString().isEmpty())){
             Log.d(TAG, "signIn: attempting to authenticate");
 
             //step1:
@@ -111,9 +108,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                     }
                                 });
                                 redirectMainScreen();
+                            } else {
+                                Toast.makeText(LoginActivity.this, "Invalid email or password, please check", Toast.LENGTH_LONG).show();
                             }
                         }
                     });
+        } else {
+            Toast.makeText(LoginActivity.this, "Please fill in the correct information!", Toast.LENGTH_LONG).show();
         }
     }
 

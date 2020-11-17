@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+xmlns:android="http://schemas.android.com/apk/res/android"
+android:id="@+id/lv_menu"
+android:layout_width="150dp"
+android:layout_height="match_parent"
+android:background="@android:color/holo_blue_light"
+android:layout_gravity="left"
+android:gravity="center_vertical|top"
+android:orientation="vertical">
+
+
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="250dp"
+    android:paddingBottom="20dp"
+    >
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:src="@mipmap/bg"
+            />
+
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_gravity="bottom"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <ImageView
+                android:layout_margin="15dp"
+                android:layout_width="130dp"
+                android:layout_height="130dp"
+                android:id="@+id/iv_head_image"
+                android:scaleType="fitXY"
+                android:src="@mipmap/head"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginBottom="20dp"
+                android:id="@+id/tv_user_name"
+                android:text="Hao"
+                android:textColor="#000000"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:gravity="center"
+                />
+
+
+
+
+        </LinearLayout>
+
+
+    </FrameLayout>
+
+</LinearLayout>
+
+
+<TextView
+    android:layout_marginTop="20dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/tv_go_usepage"
+    android:layout_marginBottom="30dp"
+    android:padding="10dp"
+    android:text="User Page"
+    android:textColor="#FFFFFF"
+    android:textSize="16sp"
+    android:gravity="center"
+    android:drawableLeft="@drawable/icon_user"
+    />
+<TextView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/tv_go_playground"
+    android:layout_marginBottom="30dp"
+    android:padding="10dp"
+    android:text="Playground"
+    android:textColor="#FFFFFF"
+    android:textSize="16sp"
+    android:gravity="center"
+    android:drawableLeft="@drawable/playground"
+
+    />
+
+<TextView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/tv_go_login_or_out"
+    android:text="login"
+    android:textColor="#FFFFFF"
+    android:layout_marginBottom="30dp"
+    android:padding="10dp"
+    android:textSize="16sp"
+    android:gravity="center"
+    android:drawableLeft="@drawable/user_info"
+    />
+
+
+</LinearLayout>

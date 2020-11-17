@@ -15,104 +15,118 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
+
             <fragment
                 android:id="@+id/map"
                 android:name="com.google.android.gms.maps.SupportMapFragment"
                 android:layout_width="match_parent"
-                android:layout_height="389dp"
+                android:layout_weight="2.5"
+                android:layout_height="0dp"/>
 
-                />
-            <LinearLayout
+            <com.github.mikephil.charting.charts.LineChart
+                android:id="@+id/runningChart"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/duration"
-                    android:text="DURATION"
-                    android:textAlignment="center"
-                    android:gravity="center_horizontal" />
-                <TextView
-                    android:id="@+id/bigDuration"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="00:00:00"
-                    android:gravity="center_horizontal"
-                    android:textSize="30sp"/>
+                android:layout_height="0dp"
+                android:layout_weight="1"/>
 
-            </LinearLayout>
             <GridLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:columnCount="2"
-                >
+                android:layout_height="wrap_content"
+
+                android:layout_marginBottom="30dp">
 
                 <LinearLayout
                     android:layout_row="0"
+                    android:layout_rowWeight="1"
                     android:layout_column="0"
                     android:layout_columnWeight="1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <CheckBox
+                        android:id="@+id/demo_checkbox1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:checked="true"
+                        android:text="Speed" />
+                </LinearLayout>
+                <Spinner
+                    android:id="@+id/mode_shifting"
+                    android:layout_row="0"
+                    android:layout_column="2"
+                    android:textColor="@color/White"
                     android:layout_rowWeight="1"
-                    android:gravity="center_vertical"
-                    >
-                    <ImageView
-                        android:id="@+id/imageView1"
-                        android:src="@drawable/logout"
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"/>
+                    android:layout_columnWeight="1"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"/>
+
+
+                <LinearLayout
+                    android:layout_row="1"
+                    android:layout_rowWeight="1"
+                    android:layout_column="0"
+                    android:layout_columnWeight="1"
+                    android:gravity="center_vertical">
 
                     <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:weightSum="2"
-                            android:orientation="vertical">
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:gravity="bottom"
-                                android:layout_weight="1"
-                                android:text="Distance:"/>
-                            <TextView
-                                android:id="@+id/distanceTextView"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:text="0 km"/>
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:paddingLeft="6dp"
+                        android:weightSum="2">
+
+                        <TextView
+                            android:id="@+id/distanceShow"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="bottom"
+                            android:text="Distance:"
+                            android:textSize="15sp" />
+
+                        <TextView
+                            android:id="@+id/running_distanceTextView"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="0 km"
+                            android:textColor="@color/finishedData"
+                            android:textSize="15sp" />
                     </LinearLayout>
 
                 </LinearLayout>
 
                 <LinearLayout
-                    android:layout_row="0"
+                    android:layout_row="1"
+                    android:layout_rowWeight="1"
                     android:layout_column="1"
                     android:layout_columnWeight="1"
-                    android:layout_rowWeight="1"
                     android:gravity="center_vertical"
-
-                    >
-                    <ImageView
-                        android:id="@+id/imageView2"
-                        android:src="@drawable/logout"
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"/>
+                    android:paddingLeft="6dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:weightSum="2"
-                        android:orientation="vertical">
+                        android:orientation="vertical"
+                        android:weightSum="2">
+
                         <TextView
+                            android:id="@+id/speedShow"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_weight="1"
                             android:gravity="bottom"
-                            android:layout_weight="1"
-                            android:text="Speed:"/>
+                            android:text="Speed:"
+                            android:textSize="15sp" />
+
                         <TextView
-                            android:id="@+id/speedTextView"
+                            android:id="@+id/running_speedTextView"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="0 m/s"/>
+                            android:text="0 m/s"
+                            android:textColor="@color/finishedData"
+                            android:textSize="15sp" />
                     </LinearLayout>
 
 
@@ -120,32 +134,176 @@
 
                 <LinearLayout
                     android:layout_row="1"
-                    android:layout_column="0"
-                    android:layout_columnWeight="1"
                     android:layout_rowWeight="1"
-                    android:gravity="center_vertical">
-                    <ImageView
-                        android:id="@+id/imageView3"
-                        android:src="@drawable/logout"
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"/>
+                    android:layout_column="2"
+                    android:layout_columnWeight="1"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="6dp">
 
-<!--                        android:src="@drawable/ic_launcher_foreground" />-->
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:orientation="vertical"
                         android:weightSum="2">
+
+                        <TextView
+                            android:id="@+id/timeShow"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="bottom"
+                            android:text="Total Time:"
+                            android:textSize="15sp" />
+
+                        <TextView
+                            android:id="@+id/running_timerTextView"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="00:00:00"
+                            android:textColor="@color/finishedData"
+                            android:textSize="15sp" />
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+            </GridLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/duration"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:text="DURATION"
+                    android:textAlignment="center" />
+
+                <TextView
+                    android:id="@+id/bigDuration"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:text="00:00:00"
+                    android:textSize="30sp" />
+
+            </LinearLayout>
+
+            <GridLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:columnCount="2">
+
+                <LinearLayout
+                    android:layout_row="0"
+                    android:layout_rowWeight="1"
+                    android:layout_column="0"
+                    android:layout_columnWeight="1"
+                    android:gravity="center_vertical">
+
+                    <ImageView
+                        android:id="@+id/imageView1"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:src="@drawable/logout" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:weightSum="2">
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:gravity="bottom"
-                            android:text="Total Time:"/>
+                            android:text="Distance:" />
+
+                        <TextView
+                            android:id="@+id/distanceTextView"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="0 km" />
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_row="0"
+                    android:layout_rowWeight="1"
+                    android:layout_column="1"
+                    android:layout_columnWeight="1"
+                    android:gravity="center_vertical"
+
+                    >
+
+                    <ImageView
+                        android:id="@+id/imageView2"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:src="@drawable/logout" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:weightSum="2">
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="bottom"
+                            android:text="Speed:" />
+
+                        <TextView
+                            android:id="@+id/speedTextView"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="0 m/s" />
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_row="1"
+                    android:layout_rowWeight="1"
+                    android:layout_column="0"
+                    android:layout_columnWeight="1"
+                    android:gravity="center_vertical">
+
+                    <ImageView
+                        android:id="@+id/imageView3"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:src="@drawable/logout" />
+
+                    <!--                        android:src="@drawable/ic_launcher_foreground" />-->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:weightSum="2">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="bottom"
+                            android:text="Total Time:" />
+
+                        <TextView
                             android:id="@+id/timerTextView"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:text="00 : 00" />
                     </LinearLayout>
@@ -155,31 +313,35 @@
 
                 <LinearLayout
                     android:layout_row="1"
+                    android:layout_rowWeight="1"
                     android:layout_column="1"
                     android:layout_columnWeight="1"
-                    android:layout_rowWeight="1"
                     android:gravity="center_vertical">
+
                     <ImageView
                         android:id="@+id/imageView4"
-                        android:src="@drawable/logout"
                         android:layout_width="50dp"
-                        android:layout_height="50dp"/>
+                        android:layout_height="52dp"
+                        android:src="@drawable/logout" />
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:orientation="vertical"
                         android:weightSum="2">
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:gravity="bottom"
-                            android:text="Estimate Calories:"/>
+                            android:text="Estimate Calories:" />
+
                         <TextView
+                            android:id="@+id/calTextView"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:id="@+id/calTextView"
-                            android:text="0 Kj"/>
+                            android:text="0 Kj" />
                     </LinearLayout>
 
 
@@ -190,41 +352,49 @@
         </LinearLayout>
 
 
-
     </RelativeLayout>
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_alignParentBottom="true"
-        >
-        <View android:id="@+id/fakeView"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_centerInParent="true"/>
-        <Button
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true">
+        <com.manojbhadane.QButton
+            android:id="@+id/goBack"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignRight="@+id/fakeView"
-            android:layout_alignParentLeft="true"
-            android:layout_centerVertical="true"
-            android:text="@string/start_run"
+            android:layout_margin="5dp"
+            android:text="Back"
+            android:textColor="@android:color/white"
+            app:qb_backgroundColor="@color/color_1_dark"
+            app:qb_radius="20"
+            app:qb_strokeWidth="5"
+            android:layout_weight="1"/>
+        <com.manojbhadane.QButton
             android:id="@+id/startRun"
-            />
-        <Button
-            android:layout_width= "wrap_content"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toRightOf="@+id/startRun"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
+            android:layout_margin="5dp"
+            android:text="@string/start_run"
+            android:textColor="@android:color/white"
+            app:qb_backgroundColor="@color/red1"
+            app:qb_radius="20"
+            app:qb_strokeWidth="5"
+            android:layout_weight="1"/>
+        <com.manojbhadane.QButton
+            android:id="@+id/stopRun"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
             android:text="@string/stop_run"
-            android:id="@+id/stopRun"/>
+            android:textColor="@android:color/white"
+            app:qb_backgroundColor="@color/btnGreen"
+            app:qb_radius="20"
+            app:qb_strokeWidth="5"
+            android:layout_weight="1"/>
 
 
 
-
-
-    </RelativeLayout>
+    </LinearLayout>
 
 
 

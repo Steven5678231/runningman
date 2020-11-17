@@ -23,4 +23,6 @@
     <string name="text3">Bookmarks</string>
     <string name="text4">Settings</string>
     <string name="action_clear">Clear</string>
+
+    <string name="game_view_content_description">Game View</string>
 </resources>

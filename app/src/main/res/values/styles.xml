@@ -1,10 +1,17 @@
 <resources>
-    <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
-    </style>
+<!-- Base application theme. -->
+<style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <!-- Customize your theme here. -->
+    <item name="colorPrimary">@color/title</item>
+    <item name="colorPrimaryDark">@color/title</item>
+    <item name="colorAccent">@color/colorAccent</item>
+</style>
+
+<style name="MyDatePickerDialogTheme" parent="Theme.AppCompat.Light.Dialog">
+    <item name="colorAccent">#0033cc</item>
+    <item name="colorControlActivated">#66a3ff</item>
+    <item name="colorControlHighlight">#66a3ff</item>
+</style>
+
 
 </resources>

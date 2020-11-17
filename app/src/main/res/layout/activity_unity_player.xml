@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".UnityPlayer">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
+        <include layout="@layout/layout_titlebar"/>
+
+        <TextView
+
+            android:id="@+id/welcome"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:gravity="center"
+            android:text="Welcome back!"
+            android:textColor="#000000"
+            android:textSize="25sp" />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="509dp"
+            android:layout_marginTop="32dp"
+            android:layout_weight="1"
+            android:src="@mipmap/enjoy" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_weight="2"
+            android:padding="16dp"
+            android:gravity="center"
+            android:layout_marginBottom="16dp"
+            android:weightSum="5">
+
+            <TextView
+
+                android:id="@+id/tv_already_login"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+
+                android:gravity="center"
+                android:text="Welcome to the world!"
+                android:textColor="#000000"
+                android:visibility="invisible"
+                android:textSize="30sp" />
+
+
+            <com.manojbhadane.QButton
+                android:layout_weight="1"
+                android:id="@+id/goBack_unity"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Back to Playground"
+                android:textColor="@android:color/white"
+                app:qb_backgroundColor="@null"
+                app:qb_radius="20"
+                app:qb_strokeWidth="5"/>
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+
+</LinearLayout>

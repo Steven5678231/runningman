@@ -1,14 +1,13 @@
 package com.example.runningman.models;
 
-import android.os.Parcel;
-import android.os.Parcelable;
 
-public class User implements Parcelable {
+public class User {
     private String email;
     private String user_id;
     private String username;
     private String extraInfo;
     private int records_count;
+
 
     public User(){
 
@@ -22,25 +21,26 @@ public class User implements Parcelable {
         this.records_count = records_count;
     }
 
-    protected User(Parcel in) {
-        email = in.readString();
-        user_id = in.readString();
-        username = in.readString();
-        extraInfo = in.readString();
-        records_count = in.readInt();
-    }
+//    protected User(Parcel in) {
+//        email = in.readString();
+//        user_id = in.readString();
+//        username = in.readString();
+//        extraInfo = in.readString();
+//        records_count = in.readInt();
+//        profileUri = in.readString();
+//    }
 
-    public static final Creator<User> CREATOR = new Creator<User>() {
-        @Override
-        public User createFromParcel(Parcel in) {
-            return new User(in);
-        }
-
-        @Override
-        public User[] newArray(int size) {
-            return new User[size];
-        }
-    };
+//    public static final Creator<User> CREATOR = new Creator<User>() {
+//        @Override
+//        public User createFromParcel(Parcel in) {
+//            return new User(in);
+//        }
+//
+//        @Override
+//        public User[] newArray(int size) {
+//            return new User[size];
+//        }
+//    };
 
     public String getEmail() {
         return email;
@@ -60,17 +60,18 @@ public class User implements Parcelable {
 
     public int getRecords_count(){return records_count;}
 
-    @Override
-    public int describeContents() {
-        return 0;
-    }
+//    @Override
+//    public int describeContents() {
+//        return 0;
+//    }
 
-    @Override
-    public void writeToParcel(Parcel parcel, int i) {
-        parcel.writeString(email);
-        parcel.writeString(user_id);
-        parcel.writeString(username);
-        parcel.writeString(extraInfo);
-        parcel.writeInt(records_count);
-    }
+//    @Override
+//    public void writeToParcel(Parcel parcel, int i) {
+//        parcel.writeString(email);
+//        parcel.writeString(user_id);
+//        parcel.writeString(username);
+//        parcel.writeString(extraInfo);
+//        parcel.writeInt(records_count);
+//        parcel.writeString(profileUri);
+//    }
 }

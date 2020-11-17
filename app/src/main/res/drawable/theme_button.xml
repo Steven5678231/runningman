@@ -4,6 +4,7 @@
     <item
         android:state_pressed="true">
         <shape>
+            <corners android:radius="6dp"/>
             <solid
                 android:color="@color/colorAccent"/>
             <stroke
@@ -15,6 +16,7 @@
 
     <item>
         <shape>
+            <corners android:radius="6dp"/>
             <solid
                 android:color="@color/colorPrimary"/>
             <stroke

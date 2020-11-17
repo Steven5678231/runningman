@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/profile_page"
+        android:icon="@drawable/ic_speed"
+        android:title="Profile"
+        android:checked="true"
+        android:iconTint="@color/linkBlue"/>
+
+    <item
+        android:id="@+id/city_page"
+        android:icon="@drawable/ic_timelast"
+        android:title="City"
+        android:iconTint="@color/black_overlay"/>
+    <item
+        android:id="@+id/running_page"
+        android:icon="@drawable/ic_distance"
+        android:title="running"
+        android:iconTint="@color/Black"
+        />
+</menu>
